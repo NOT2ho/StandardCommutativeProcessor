@@ -68,7 +68,7 @@ other notations are usual
 
 #### I <sup>n</sup> <sub>i</sub>
 
-`I^n_index` is I <sup>n</sup> <sub>i</sub>. it is just projection 
+`I^n_i` is I <sup>n</sup> <sub>i</sub>. it is just projection 
 
 index start at 1
 
