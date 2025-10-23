@@ -47,7 +47,7 @@ it contains O, S, I<sup>n</sup> <sub>i</sub>, primitive recursion, μ-recursion,
 
 all functions are pure numeric, immutable. so scp-0 is commutative (if you think the blank is binary operation) 
 
-no higher order function allowed yet, functionals are so mendokusina i'll do it later
+no higher order function allowed yet, functionals are so mendokusaina i'll do it later
 
 
 
@@ -70,7 +70,7 @@ other notations are usual
 
 `I^n_i` is I <sup>n</sup> <sub>i</sub>. it is just projection 
 
-index start at 1
+index starts at 1
 
 example: `I^3_2` is a function `(_,x,_) ↦ x`
 
