@@ -98,11 +98,9 @@ if there is no such y, f will be undefined so program will not stop forever
 if c1​(𝑥⃗)↑ ∨ … ∨ cm​(𝑥⃗)↑, f will be undefined so program will not stop forever
 
 #### :
-putting `:f` somewhere, the program will represent f
+putting `f:` somewhere, the program will represent f
 
 `:` must exist uniquely or your program dooms
-
-(why not `f:` ? parser mendokusai issue)
 
 ### naming rule
 
