@@ -2,8 +2,8 @@
 
 it is DIY kit for make your own standard commutative numbering.
 
-it contains scp-0 and haskell compiler. 
-using scp-0, you can define `ℕ×ℕ..×ℕ-> ℕ` recursive function. (scp-0 can represent all partial recursive functions, so you can just use scp-0 independently for represent all programs.)
+it contains [scp-0](https://github.com/NOT2ho/StandardCommutativeProcessor?tab=readme-ov-file#semicommutative-processor-0) and haskell compiler. 
+using [scp-0](https://github.com/NOT2ho/StandardCommutativeProcessor?tab=readme-ov-file#semicommutative-processor-0), you can define `ℕ×ℕ..×ℕ-> ℕ` recursive function. ([scp-0](https://github.com/NOT2ho/StandardCommutativeProcessor?tab=readme-ov-file#semicommutative-processor-0) can represent all partial recursive functions, so you can just use [scp-0](https://github.com/NOT2ho/StandardCommutativeProcessor?tab=readme-ov-file#semicommutative-processor-0) independently for represent all programs.)
 
 it converts string(as element of commutative monoid) onto godel numbers(range can be greater than set of godel numbers) and compile the number.
 
@@ -13,7 +13,7 @@ it converts string(as element of commutative monoid) onto godel numbers(range ca
 Char list. `abc` means `input = (number of a,number of b,number of c)`
 
 #### line 2
-scp-0 code. your self-made partial recursive function. 
+[scp-0](https://github.com/NOT2ho/StandardCommutativeProcessor?tab=readme-ov-file#semicommutative-processor-0) code. your self-made partial recursive function. 
 
 input will be tuple of line 1, output is a godel number(it is just haskell code coded into natural number, by prime factorization)
 
