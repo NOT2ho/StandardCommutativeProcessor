@@ -1,8 +1,12 @@
 {-# LANGUAGE ParallelListComp #-}
+
 import Data.Bifunctor
 import System.Directory
 import System.FilePath
 import Distribution.Compat.Prelude(readMaybe)
+
+numbering :: IO ()
+numbering = main
 
 main :: IO ()
 main = do
@@ -84,3 +88,4 @@ code c = let mu i
                | fromInteger i == 0 = error "your char wrong"
                | otherwise = mu (i-1)
             in mu (fromIntegral (length symbols) -1)
+
