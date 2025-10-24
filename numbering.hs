@@ -1,6 +1,6 @@
 {-# LANGUAGE ParallelListComp #-}
 
-module Numbering(conaturalizer) where
+module Numbering(conaturalizer, main) where
 
 import Data.Bifunctor
 import System.Directory

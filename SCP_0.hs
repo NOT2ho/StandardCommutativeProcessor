@@ -2,7 +2,7 @@
 {-# HLINT ignore "Use camelCase" #-}
 
 
-module SCP_0 (scp_0) where
+module SCP_0 (scp_0, main) where
 
 import Data.Tree
 import Data.Set as S (Set, take, partition, size, elemAt, fromList, map, toList)

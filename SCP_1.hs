@@ -3,13 +3,13 @@
 {-# HLINT ignore "Use camelCase" #-}
 {-# LANGUAGE ParallelListComp #-}
 
-module SCP_1 where
+module SCP_1(main) where
 
 import Data.List (group, sort, genericLength)
 import System.Directory
 import System.FilePath
-import SCP_0
-import Numbering
+import SCP_0(scp_0)
+import Numbering(conaturalizer)
 
 main :: IO ()
 main = do 
