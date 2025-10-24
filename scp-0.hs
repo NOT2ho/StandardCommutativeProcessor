@@ -16,25 +16,34 @@ main = pure ()
 
 type N = Integer
 
-s :: N -> N
+s :: (N -> N)
 s = (+ 1)
 
-o :: N -> N
-o x = 0
+o :: (N -> N)
+o = const 0
 
 ini :: N -> N -> ([N] -> N)
 ini n i l = if length l == fromIntegral n then fromIntegral (l !! (fromInteger i+1)) else error "your fault"
 -- i think index will be small..
 
-prec ::  [N] -> ([N] -> N) -> ([N] -> N) -> N
-prec x' p c = let (xs,x) = (init x', last x') in
-    if x == 0 then p xs
-    else c (xs ++ [x-1] ++ [prec (xs ++ [x-1]) p c])
 
-mrec :: [N] -> ([N] -> N) -> N
-mrec x p = let mu y = if p (x ++ [y]) == 0 then y
-                    else mu (y+1)
-            in mu 0
+
+prec :: ([N] -> N) -> ([N] -> N) ->  ([N] -> N)
+prec p c = prec' p c
+    where
+        prec' :: ([N] -> N) -> ([N] -> N) -> [N] -> N
+        prec' p' c' x' =
+            let (xs,x) = (init x', last x') in
+            if x == 0 then p xs
+            else c (xs ++ [x-1] ++ [prec' p' c' (xs ++ [x-1])])
+
+mrec :: ([N] -> N) ->  ([N] -> N)
+mrec  = mrec'
+    where
+        mrec' ::([N] -> N) -> [N] -> N
+        mrec' p x = let mu y = if p (x ++ [y]) == 0 then y
+                            else mu (y+1)
+                    in mu 0
 
 comp :: ([N] -> N) -> [[N] -> N] -> ([N] -> N)
 comp f cs x = f (($ x) <$> cs)
@@ -49,8 +58,8 @@ comp f cs x = f (($ x) <$> cs)
 --             in 
 
 
-
-
+-- dfs :: Node -> ([N] -> N)
+-- dfs = 
 
 
 
