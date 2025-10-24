@@ -111,7 +111,7 @@ you can name functions using a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,x
 
 ### example 
 
-`g>S.I^3_1 f|>I^1_1 f|+>g f:` means `(a, b) ↦ a + b`
+`g>S.I^3_3 f|>I^1_1 f|+>g f:` means `(a, b) ↦ a + b`
 
 
 ### warning

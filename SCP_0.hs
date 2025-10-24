@@ -1,41 +1,68 @@
 {-# OPTIONS_GHC -Wno-unrecognised-pragmas #-}
 {-# HLINT ignore "Use camelCase" #-}
+
+
+module SCP_0 (scp_0) where
+
 import Data.Tree
 import Data.Set as S (Set, take, partition, size, elemAt, fromList, map, toList)
 import qualified Data.List as L (partition, take, map)
 import Data.Char
+import Control.Monad
+
+
 ------------------------------------------------------
 
 
 main :: IO ()
-main = pure ()
+main = do
+        putStrLn "welcome to the scp-0 world"
+        forever scpi
+    
+scpi :: IO ()
+scpi =  do 
+            putStr "code: "
+            code <- getLine
+            putStr "param number: "
+            num <- read <$> getLine
+            param <- inputList num []
+            putStrLn $ "num: " ++ show (scp_0 code $ reverse param)
 
+inputList :: Int -> [Integer] -> IO [Integer]
+inputList i l = do 
+    if i == 0 then return l
+    else do
+        putStr "enter number: "
+        n <- getLine 
+        inputList (i-1) (read n:l)
 
 ----------------initial functions, primitive recursion, mu recursion, composition --------------
 
 
 type N = Integer
 
-s :: (N -> N)
-s = (+ 1)
+s :: ([N] -> N)
+s x = if length x == 1 then head x + 1 else error "your fault"
 
-o :: (N -> N)
+o :: ([N] -> N)
 o = const 0
 
 ini :: N -> N -> ([N] -> N)
-ini n i l = if length l == fromIntegral n then fromIntegral (l !! (fromInteger i+1)) else error "your fault"
+ini n i l = if length l == fromIntegral n 
+                then fromIntegral (l !! (fromInteger i-1)) 
+                else error"you wrong"
 -- i think index will be small..
 
 
 
 prec :: ([N] -> N) -> ([N] -> N) ->  ([N] -> N)
-prec p c = prec' p c
+prec= prec'
     where
         prec' :: ([N] -> N) -> ([N] -> N) -> [N] -> N
         prec' p' c' x' =
             let (xs,x) = (init x', last x') in
-            if x == 0 then p xs
-            else c (xs ++ [x-1] ++ [prec' p' c' (xs ++ [x-1])])
+            if x == 0 then p' xs
+            else c' (xs ++ [x-1] ++ [prec' p' c' (xs ++ [x-1])])
 
 mrec :: ([N] -> N) ->  ([N] -> N)
 mrec  = mrec'
@@ -50,17 +77,22 @@ comp f cs x = f (($ x) <$> cs)
 
 
 
-------------------------------------------------
+-------------------eval-----------------------------
 
 
--- scp_0 :: String -> ([N] -> N)
--- scp_0 s = let pt = parseTree s
---             in 
+scp_0 :: String -> ([N] -> N)
+scp_0 s = let (ROOT pt) = parseTree s
+            in eval pt
 
 
--- dfs :: Node -> ([N] -> N)
--- dfs = 
-
+eval :: Node -> ([N] -> N)
+eval n = case n of
+    COMP g cs -> comp (eval g) (L.map eval cs)
+    PREC g c -> prec (eval g) (eval c)
+    MU c -> mrec (eval c)
+    O -> o
+    S -> s
+    I n i -> ini n i
 
 
 -------------------------parser----------------------
@@ -76,7 +108,7 @@ data Node
     deriving (Show)
 
 
-parseTree :: String -> Node 
+parseTree :: String -> Node
 parseTree = subparseTree . fromList . parser
     where
         subparseTree :: Set [String] -> Node
@@ -88,20 +120,20 @@ parseTree = subparseTree . fromList . parser
         nodes :: String -> [[String]] -> Node
         nodes fname s= let (fs, others) = L.partition (\x -> head x == fname) s
                             in case fs of
-                                [f1,f2]     | f1 !! 1 == "PREC0" && f2 !! 1 == "PREC1" 
+                                [f1,f2]     | f1 !! 1 == "PREC0" && f2 !! 1 == "PREC1"
                                                 -> PREC (nodes (f1 !! 2) others) (nodes (f2 !! 2) others)
-                                            | f2 !! 1 == "PREC0" &&  f1 !! 1 == "PREC1" 
+                                            | f2 !! 1 == "PREC0" &&  f1 !! 1 == "PREC1"
                                                 -> PREC (nodes (f2 !! 2) others) (nodes (f1 !! 2) others)
                                             | otherwise -> error $ "your primitive recursion wrong: " ++ show fs
 
                                 [f] | f !! 1 == "COMP" -> COMP (nodes (f !! 2) others) (L.map (`nodes` others) $ drop 3 f)
                                     | f !! 1 == "MU" -> MU (nodes (f!! 2) others)
-                                
-                                _ 
+
+                                _
                                     | fname == "O" -> O
                                     | fname == "S" -> S
                                     | head fname == 'I' ->
-                                        let (fn:ame) = fname 
+                                        let (fn:ame) = fname
                                         in let (n, i) = span (/=',') ame
                                             in I (read n) (read $ drop 1 i)
                                     | otherwise -> error (show (fname, s, fs, others))

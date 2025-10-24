@@ -1,5 +1,7 @@
 {-# LANGUAGE ParallelListComp #-}
 
+module Numbering(conaturalizer) where
+
 import Data.Bifunctor
 import System.Directory
 import System.FilePath
@@ -21,10 +23,10 @@ main = do
     putStr "0 to naturalize, else to else: "
     what <- inputNum 2
     putStrLn "... "
-    -- print file
     if what == 0 then do
-            putStrLn "to number: "   
-            writeFile output $ show (naturalizer (show file)) 
+            putStrLn "to number: "  
+            putStrLn $ show (factorize (naturalizer (file)) )
+            writeFile output $ show (naturalizer (file)) 
         else do
             putStrLn "to string: "  
             writeFile output $ conaturalizer (read file:: Integer)  
