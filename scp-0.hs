@@ -10,7 +10,11 @@ import Data.Char
 main :: IO ()
 main = pure ()
 
-type N = Int
+
+----------------initial functions, primitive recursion, mu recursion, composition --------------
+
+
+type N = Int -- or Integer
 
 s :: N -> N
 s = (+ 1)
@@ -35,7 +39,20 @@ comp :: ([N] -> N) -> [[N] -> N] -> ([N] -> N)
 comp f cs x = f (($ x) <$> cs)
 
 
------------------------------------------------------------------
+
+------------------------------------------------
+
+
+scp_0 :: 
+
+
+
+
+
+
+
+
+-------------------------parser----------------------
 
 data Node
     = COMP Node [Node]

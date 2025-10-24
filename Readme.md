@@ -114,7 +114,7 @@ you can name functions using a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,x
 `g>S.I^3_1 f|>I^1_1 f|+>g f:` means `(a, b) ↦ a + b`
 
 
-### *** warning ***
+### warning
 
 unexpected program can be run if your code has incorrect syntax 
 
