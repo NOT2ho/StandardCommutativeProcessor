@@ -14,7 +14,7 @@ main = pure ()
 ----------------initial functions, primitive recursion, mu recursion, composition --------------
 
 
-type N = Int -- or Integer
+type N = Integer
 
 s :: N -> N
 s = (+ 1)
@@ -23,7 +23,8 @@ o :: N -> N
 o x = 0
 
 ini :: N -> N -> ([N] -> N)
-ini n i l = if length l == n then  l !! (i+1) else error "your fault"
+ini n i l = if length l == fromIntegral n then fromIntegral (l !! (fromInteger i+1)) else error "your fault"
+-- i think index will be small..
 
 prec ::  [N] -> ([N] -> N) -> ([N] -> N) -> N
 prec x' p c = let (xs,x) = (init x', last x') in
@@ -43,8 +44,9 @@ comp f cs x = f (($ x) <$> cs)
 ------------------------------------------------
 
 
-scp_0 :: 
-
+-- scp_0 :: String -> ([N] -> N)
+-- scp_0 s = let pt = parseTree s
+--             in 
 
 
 
