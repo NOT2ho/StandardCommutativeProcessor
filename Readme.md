@@ -57,6 +57,8 @@ notation: ≃ means both undefined or samely defined. μy[p(y)] search for minim
 
 other notations are usual
 
+scp-0 is set of words. so order and duplicated words are ignored.
+
 ### functions
 
 #### O
@@ -100,7 +102,7 @@ if c1​(𝑥⃗)↑ ∨ … ∨ cm​(𝑥⃗)↑, f will be undefined so progr
 #### :
 putting `f:` somewhere, the program will represent f
 
-`:` must exist uniquely or your program dooms
+`:` must exist uniquely or your program dooms 
 
 ### naming rule
 
@@ -109,11 +111,14 @@ you can name functions using a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,x
 
 ### example 
 
-`g>S.I^3_1 f|>I^1_1 f|+>g :f` means `(a, b) ↦ a + b`
+`g>S.I^3_1 f|>I^1_1 f|+>g f:` means `(a, b) ↦ a + b`
 
 
+### *** warning ***
 
+unexpected program can be run if your code has incorrect syntax 
 
+it is all your fault if it happened 
 
 
 ---
