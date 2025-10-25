@@ -12,7 +12,7 @@ import SCP_0(scp_0)
 import Numbering(conaturalizer)
 
 main :: IO ()
-main = do 
+main = do
     putStrLn "welcome to the scp-1 world"
     currentDir <- getCurrentDirectory
     putStr "input file name: "
@@ -26,8 +26,8 @@ main = do
 
 scp_1 :: String -> String
 scp_1 str = case lines str of
-                [alpha, f, s] -> conaturalizer $ scp_0 f (counter alpha s)
-                _ -> error "input 3 lines"
+                [alpha, f, s] -> either conaturalizer ("something wrong in scp-0 code. \n" ++) $ scp_0 f (counter alpha s)
+                _ -> "USER ERROR: input 3 lines"
 
 
 counter :: String -> String -> [Integer]

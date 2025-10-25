@@ -24,12 +24,12 @@ main = do
     what <- inputNum 2
     putStrLn "... "
     if what == 0 then do
-            putStrLn "to number: "  
-            putStrLn $ show (factorize (naturalizer (file)) )
-            writeFile output $ show (naturalizer (file)) 
+            putStrLn "to number: "
+            print (factorize (naturalizer file) )
+            writeFile output $ show (naturalizer file)
         else do
-            putStrLn "to string: "  
-            writeFile output $ conaturalizer (read file:: Integer)  
+            putStrLn "to string: "
+            writeFile output $ conaturalizer (read file:: Integer)
 
 inputNum :: Int -> IO Int
 inputNum n = do

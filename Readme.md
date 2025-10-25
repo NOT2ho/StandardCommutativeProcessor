@@ -2,10 +2,10 @@
 
 it is DIY kit for make your own standard commutative numbering.
 
-it contains [scp-0](https://github.com/NOT2ho/StandardCommutativeProcessor?tab=readme-ov-file#semicommutative-processor-0) and haskell compiler. 
+it contains [scp-0](https://github.com/NOT2ho/StandardCommutativeProcessor?tab=readme-ov-file#semicommutative-processor-0). 
 using [scp-0](https://github.com/NOT2ho/StandardCommutativeProcessor?tab=readme-ov-file#semicommutative-processor-0), you can define `ℕ×ℕ..×ℕ-> ℕ` recursive function. ([scp-0](https://github.com/NOT2ho/StandardCommutativeProcessor?tab=readme-ov-file#semicommutative-processor-0) can represent all partial recursive functions, so you can just use [scp-0](https://github.com/NOT2ho/StandardCommutativeProcessor?tab=readme-ov-file#semicommutative-processor-0) independently for represent all programs.)
 
-it converts string(as element of commutative monoid) onto godel numbers(range can be greater than set of godel numbers) and compile the number.
+it converts string(as element of commutative monoid) onto godel numbers(range can be greater than set of godel numbers) and change it to .hs file. you have to prepare haskell compiler to compile it.
 
 ## syntax 
 
@@ -22,24 +22,14 @@ input will be tuple of line 1, output is a godel number(it is just haskell code 
 string(as element of commutative monoid) made of chars in line 1. 
 
 
-#### it will count the number of each char in line 3, and make it to tuple(order determined by line 1) and the function in line 2 will turn the tuple into a godel number(haskell code) and the code will be complied.
+#### it will count the number of each char in line 3, and make it to tuple(order determined by line 1) and the function in line 2 will turn the tuple into a godel number(haskell code) and you will compile the code using haskell compiler(i said that you have to prepare haskell compiler).
 
-### some not good example: 
-
-```
-abcdefgij
-(x0,x1,x2,x3,x4,x5,x6,x7,x8)->(2^x0*3^x1*5^x2*7^x3*11^x4*13^x5*17^x6*19^x7*23^x8) -- it is sudocode
-aaaaaaaaaaaggggggjjjjjjjjjjjjdddddddaaaaajjjjjjjjjjjjjjjjbbbbaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaiiiiiiiggggggiiiiiiiiiiijjjjjjjjjjjjjjjjjjjjjjaaaaaaaeeeeeeeeeeeeeeffffffffffffffffffffffffffffffffffffffffffffffffggggabbbbcccccccccfffffffffffffffffaaaaabbbbbbbbbbaaaaaaaaiiiiiiiiiiiiiiiiiiiiiiiiiiigggggggfffffccccggggggiiiiiiiiicaaaaaaacccccbbbbiiijjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjgggggggggggggggggggggggggggffffffffffffffffffffffffffeaaaaaddddddddd
-```
-
-in this case `aaaaaaaaaaaggggggjjjjjjjjjjjjdddddddaaaaajjjjjjjjjjjjjjjjbbbbaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaiiiiiiiggggggiiiiiiiiiiijjjjjjjjjjjjjjjjjjjjjjaaaaaaaeeeeeeeeeeeeeeffffffffffffffffffffffffffffffffffffffffffffffffggggabbbbcccccccccfffffffffffffffffaaaaabbbbbbbbbbaaaaaaaaiiiiiiiiiiiiiiiiiiiiiiiiiiigggggggfffffccccggggggiiiiiiiiicaaaaaaacccccbbbbiiijjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjgggggggggggggggggggggggggggffffffffffffffffffffffffffeaaaaaddddddddd` represents `(83,22,19,16,15,96,56,57,83)` and by `(x0,x1,x2,x3,x4,x5,x6,x7,x8)->(2^x0*3^x1*5^x2*7^x3*11^x4*13^x5*17^x6*19^x7*23^x8)` the number is `45826143037620432864501479442625644954164520255613681749668324069528878752359361242174946715722194008898020316908186168841295342794266793540822091868135825055329354680522875742385669065124120130865452226276538681951371444928626570816955944453448517095486506282272302237751624180901926862210861878069343165732877670521393820285627519956695972280190929227866570811620889424696782846373492982769729638904815383361658940293120000000000000000000` and the haskell code `pure ()` will be compiled. (of course this is not total code so compile error will happen but that is not the point)
-
-the function `(x0,x1,x2,x3,x4,x5,x6,x7,x8)->(2^x0*3^x1*5^x2*7^x3*11^x4*13^x5*17^x6*19^x7*23^x8)` is not onto. but you can find onto function and use it(trivial example: `(x, ..., _)-> x` i don't know nontrivial thing exists).
-
+### some example: 
+todo
 
 # SemiCommutative Processor 0
 
-there is no io, scp-0 just represents a partial recursive function.
+scp-0 represents a partial recursive function. 
 
 scp-0 code is just set of first order formulas representing partial recursive functions, so scp-0 is actually an sublanguage of first order language. nothing special
 
@@ -116,13 +106,37 @@ you can name functions using a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,x
 
 ### warning
 
-unexpected program can be run if your code has incorrect syntax 
+unexpected thing can happen if your code has incorrect syntax 
 
 it is all your fault if it happened 
 
 
+## scpi 
+
+it is scp-0 interpreter works forever (of course there can be some exception)
+
+input syntax : `code [n1, n2, .. nm]`, output is just a number
+
+```
+welcome to the scp-0 world. scpi will run forever
+scpi> 453
+input parse error
+scpi> g: g>S.0
+input parse error
+scpi> g: g>S.0 [2]
+1
+scpi> g: g>S.0 k: [2]
+USER ERROR: why root do not uniquely exist: fromList [["g", "root"], ["k", "root"]]
+scpi> f: g>S.I^3_3 f|>I^1_1 f|+>g [1,2,4]
+USER ERROR: you wrong! !! your I is 1-ary, not 2-ary
+scpi> f: g>S.I^3_3 f|>I^1_1 f|+>g [1,7]
+8
+```
+
 ---
-## cite
+this project is nonsense for make you laugh
+
+## citation
 first order formulas are from 
 
 Odifreddi, Piergiorgio (1989). Classical Recursion Theory. North-Holland. ISBN 0-444-87295-7.
