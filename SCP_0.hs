@@ -23,7 +23,7 @@ main :: IO ()
 main = do
         hSetBuffering stdin NoBuffering
         hSetBuffering stdout NoBuffering
-        putStrLn "scpi 0.0 https://github.com/NOT2ho/StandardCommutativeProcessor \nwelcome to the scp-0 world. scpi will run forever"
+        putStrLn "scpi 0.0.1 https://github.com/NOT2ho/StandardCommutativeProcessor \nwelcome to the scp-0 world. scpi will run forever"
         forever scpi
 
 scpiParser :: String -> (String, Maybe [Integer])
@@ -117,6 +117,7 @@ scp_0 s = let (ROOT pt) = parseTree s
 
 eval :: Node -> F
 eval n = case n of
+    ERROR s -> const (Right s)
     COMP g cs -> comp (eval g) (L.map eval cs)
     PREC g c -> prec (eval g) (eval c)
     MU c -> mrec (eval c)
@@ -170,7 +171,7 @@ parseTree = subparseTree . fromList . parser
                                             let (fn:ame) = fname
                                             in let (n, i) = span (/=',') ame
                                                 in I (read n) (read $ drop 1 i)
-                                        | otherwise -> ERROR (show (fname, s, fs, others))
+                                        | otherwise -> ERROR (fname ++ " not found")
 
 parser :: String -> [[String]]
 parser s = L.map subparser (words s)
@@ -186,7 +187,7 @@ parser s = L.map subparser (words s)
                                 | t == "|+>" = "PREC1" : initial strs
                                 | t == "<" = "MU" : initial strs
                                 | t == ":" = ["root"]
-                                | otherwise = ["ERROR" ++ "what is " ++ t]
+                                | otherwise = ["ERROR" , "what is " ++ t]
 
         initial :: [Char] -> [String]
         initial (c:cs)
@@ -196,20 +197,20 @@ parser s = L.map subparser (words s)
                 if head (projection cs)  == 'E' then ["ERROR" , drop 1 $ projection cs]
                 else ["I" ++ projection cs]
             | all ((||) <$> isDigit <*> isLower) (c:cs) = [c:cs]
-            | otherwise = ["ERROR"++ (c:cs) ++ " is not initial function or function name"]
+            | otherwise = ["ERROR", (c:cs) ++ " is not initial function or function name"]
         initial [] = []
 
         projection :: [Char] -> [Char]
         projection cs =
             let (sup,n,sub,i) = (L.take 1 cs, takeWhile ((||) <$> isDigit <*> isLower) (drop 1 cs), L.take 1 $ dropWhile (/='_') cs, tail $ dropWhile (/='_') cs )
-                in if sup == "^" && all isDigit n && sub == "_" && all isDigit i
-                                    then
+                in if sup == "^" && all isDigit n && sub == "_" && all isDigit i && n /= [] && i /= []
+                                        then
                                         let (n', i') = (read n :: Int, read i :: Int)
                                         in
                                             if n' >= i' && n' > 0 && i' > 0
                                             then  n++ "," ++i
                                             else "E" ++  ("your index wrong: " ++ "i= " ++ i ++ ", n= " ++ n )
-                                    else "E"  ++ ("what is "++ cs)
+                                    else "E" ++ ("your projection is not ^[0-9]_[0-9], it is " ++ cs)
 
         composition :: [Char] -> [String]
         composition str = let (s1, s2) = span (/=',') str
