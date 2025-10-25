@@ -131,7 +131,12 @@ scpi> f: g>S.I^3_3 f|>I^1_1 f|+>g [1,2,4]
 USER ERROR: you wrong! !! your I is 1-ary, not 2-ary
 scpi> f: g>S.I^3_3 f|>I^1_1 f|+>g [1,7]
 8
+scpi> g>S.I^3_3 f|>I^1_1 f|+>g m: m<g
+
+
 ```
+infinite loop is not error (if you find the way to know whether it is infinite loop or not then the world explode)
+
 
 ---
 this project is nonsense for make you laugh
