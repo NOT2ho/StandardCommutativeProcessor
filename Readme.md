@@ -1,11 +1,25 @@
 # Standard Commutative Processor
 
+
 it is DIY kit for make your own standard commutative numbering.
+
+# SCP-n 
+
+you can iterate [this](https://github.com/NOT2ho/StandardCommutativeProcessor?tab=readme-ov-file#SCP-1) forever (replace scp-0 to scp-(n-1), scp-1 to scp-n)
+
+# SCP-1
+
 
 it contains [scp-0](https://github.com/NOT2ho/StandardCommutativeProcessor?tab=readme-ov-file#semicommutative-processor-0). 
 using [scp-0](https://github.com/NOT2ho/StandardCommutativeProcessor?tab=readme-ov-file#semicommutative-processor-0), you can define `ℕ×ℕ..×ℕ-> ℕ` recursive function. ([scp-0](https://github.com/NOT2ho/StandardCommutativeProcessor?tab=readme-ov-file#semicommutative-processor-0) can represent all partial recursive functions, so you can just use [scp-0](https://github.com/NOT2ho/StandardCommutativeProcessor?tab=readme-ov-file#semicommutative-processor-0) independently for represent all programs.)
 
-it converts string(as element of commutative monoid) onto godel numbers(range can be greater than set of godel numbers) and change it to .hs file. you have to prepare haskell compiler to compile it.
+it converts string(as element of commutative monoid) onto godel numbers(range can be greater than set of godel numbers) and change it to .scp file.
+
+
+
+you can change scp-0 to other language if you want. (in this case you should change the function 'symbols'(Numbering.hs:80) and recompile)
+
+
 
 ## syntax 
 
@@ -15,14 +29,14 @@ Char list. `abc` means `input = (number of a,number of b,number of c)`
 #### line 2
 [scp-0](https://github.com/NOT2ho/StandardCommutativeProcessor?tab=readme-ov-file#semicommutative-processor-0) code. your self-made partial recursive function. 
 
-input will be tuple of line 1, output is a godel number(it is just haskell code coded into natural number, by prime factorization)
+input will be tuple of line 1, output is a godel number(it is just scp-0 code coded into natural number, by prime factorization)
 
 #### line 3
 
 string(as element of commutative monoid) made of chars in line 1. 
 
 
-#### it will count the number of each char in line 3, and make it to tuple(order determined by line 1) and the function in line 2 will turn the tuple into a godel number(haskell code) and you will compile the code using haskell compiler(i said that you have to prepare haskell compiler).
+#### it will count the number of each char in line 3, and make it to tuple(order determined by line 1) and the function in line 2 will turn the tuple into a godel number(it is scp-0 code). and you can ctrl c v it in scpi.
 
 ### some example: 
 todo

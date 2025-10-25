@@ -78,7 +78,7 @@ empowerer i p = let rec j i = if i `mod` p /= 0 then j else rec (j+1) (i `div` p
                     in rec 0 i
 
 symbols :: [Char]
-symbols ="`1234567890-=qwertyuiop[]\\asdfghjkl;\'zxcvbnm,./~!@#$%^&*()_+QWERTYUIOP{}|ASDFGHJKL:\"ZXCVBNM<>?\n\t "
+symbols =",.+IO|S:<> 1234567890qwertyuiopasdfghjklzxcvbnm[]"
 
 de :: Integer -> Char
 de i = if fromIntegral i < length symbols then symbols !! fromIntegral i
