@@ -63,7 +63,7 @@ other notations are usual
 
 scp-0 is set of words. so order and duplicated words are ignored.
 
-word which is not subnode of root will be ignored `g h: h>O ㄷㄱ해독히ㅜ대ㅑ허 []` is equal to `h: h>O` (it is just 0) - convenience of parsing 
+useless inputs, word which is not subnode of root will be ignored `g h: h>O ㄷㄱ해독히ㅜ대ㅑ허 [3,5]` is equal to `h: h>O []` (it is just 0) - convenience of parsing 
 
 ### functions
 
