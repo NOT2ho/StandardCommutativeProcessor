@@ -142,7 +142,7 @@ input parse error
 scpi> g: g>S.0 [2]
 1
 scpi> g: g>S.0 k: [2]
-USER ERROR: why root do not uniquely exist: fromList [["g", "root"], ["k", "root"]]
+USER ERROR: why root do not uniquely exist: g,k
 scpi> f: g>S.I^3_3 f|>I^1_1 f|+>g [1,2,4]
 USER ERROR: you wrong! !! your I is 1-ary, not 2-ary
 scpi> f: g>S.I^3_3 f|>I^1_1 f|+>g [1,7]
