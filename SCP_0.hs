@@ -23,7 +23,7 @@ main :: IO ()
 main = do
         hSetBuffering stdin NoBuffering
         hSetBuffering stdout NoBuffering
-        putStrLn "scpi 0.0.1 https://github.com/NOT2ho/StandardCommutativeProcessor \nwelcome to the scp-0 world. scpi will run forever"
+        putStrLn "scpi 0.0.2 https://github.com/NOT2ho/StandardCommutativeProcessor \nwelcome to the scp-0 world. scpi will run forever"
         forever scpi
 
 scpiParser :: String -> (String, Maybe [Integer])
@@ -145,33 +145,40 @@ parseTree = subparseTree . fromList . parser
     where
         subparseTree :: Set [String] -> Node
         subparseTree set = let (root, es) = S.partition (\x -> drop 1 x == ["root"]) set
-                        in if size root == 1 then ROOT (nodes (head $ elemAt 0 root) $ toList es)
-                            else ROOT (ERROR ("why root do not uniquely exist: "++ show root))
+                        in case () of
+                                    ()  | size root == 1 -> ROOT (nodes (head $ elemAt 0 root) $ toList es)
+                                        | size root == 0 -> ROOT (ERROR "why root do not uniquely exist: no root" )
+                                        | size root > 1 ->  ROOT (ERROR ("why root do not uniquely exist: "++ init (concatMap (++",") (toList (S.map head root)))))
 
 
         nodes :: String -> [[String]] -> Node
+        nodes [] s = case find ("ERROR" `elem`) s of
+                        Just e -> ERROR (dropWhile (/="ERROR") e !! 1)
+                        Nothing ->  ERROR "empty function name not allowed"
         nodes fname s= case find ("ERROR" `elem`) s of
                         Just e -> ERROR (dropWhile (/="ERROR") e !! 1)
                         Nothing ->
                             let (fs, others) = L.partition (\x -> head x == fname) s
                                 in case fs of
-                                    [f1,f2]     | f1 !! 1 == "PREC0" && f2 !! 1 == "PREC1"
+                                    [f1,f2]     | length f1 < 3 || length f2 < 3 -> ERROR "what do you want to do"      
+                                                | f1 !! 1 == "PREC0" && f2 !! 1 == "PREC1"
                                                     -> PREC (nodes (f1 !! 2) others) (nodes (f2 !! 2) others)
                                                 | f2 !! 1 == "PREC0" &&  f1 !! 1 == "PREC1"
                                                     -> PREC (nodes (f2 !! 2) others) (nodes (f1 !! 2) others)
                                                 | otherwise -> ERROR ("your primitive recursion wrong: " ++ show fs)
 
-                                    [f] | f !! 1 == "COMP" -> COMP (nodes (f !! 2) others) (L.map (`nodes` others) $ drop 3 f)
-                                        | f !! 1 == "MU" -> MU (nodes (f!! 2) others)
-
+                                    [f]         | length f < 3 -> ERROR "what do you want to do"                                         
+                                                | f !! 1 == "COMP" -> COMP (nodes (f !! 2) others) (L.map (`nodes` others) $ drop 3 f)
+                                                | f !! 1 == "MU" -> MU (nodes (f!! 2) others)
+                                                   
                                     _
-                                        | fname == "O" -> O
-                                        | fname == "S" -> S
-                                        | head fname == 'I' ->
-                                            let (fn:ame) = fname
-                                            in let (n, i) = span (/=',') ame
-                                                in I (read n) (read $ drop 1 i)
-                                        | otherwise -> ERROR (fname ++ " not found")
+                                                | fname == "O" -> O
+                                                | fname == "S" -> S
+                                                | fname /= [] && head fname == 'I' ->
+                                                    let (fn:ame) = fname
+                                                    in let (n, i) = span (/=',') ame
+                                                        in I (read n) (read $ drop 1 i)
+                                                | otherwise -> ERROR (fname ++ " not found")
 
 parser :: String -> [[String]]
 parser s = L.map subparser (words s)
