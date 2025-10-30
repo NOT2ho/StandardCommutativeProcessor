@@ -148,13 +148,13 @@ greater then 1 ary e.g. `c: c>a,S.S.S,b.d,S.O (some code omitted)` also allowed
 
 iterate `S` n times. e.g. `S^3` equals to `s3: s2>S.S s3>S.s2` (it is `+ 3`) 
 
-*from 0.1 *
+*from 0.1*
 
 #### :=
 
 just renaming the initial function. `id: id:=I^1_1` is just `I^1_1`.
 
-*from 0.1 *
+*from 0.1*
 
 
 ### how to make it
@@ -206,7 +206,7 @@ id: `I^1_1`
 
 if you want another characteristic function, make it yourself.
 
-*from 0.1 *
+*from 0.1*
 
 ### warning
 
@@ -246,7 +246,7 @@ USER ERROR: you wrong! !! your I is 1-ary, not 2-ary
 scpi> f: g>S.I^3_3 f|>I^1_1 f|>>g [1,7]
 8
 scpi> g>S.I^3_3 f|>I^1_1 f|>>g m: m<g [2,5]
-*hangs forever*
+* hangs forever *
 
 ```
 infinite loop is not error (if you find the way to know whether it is infinite loop or not then the world explode)
