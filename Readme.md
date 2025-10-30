@@ -64,7 +64,7 @@ other notations are usual
 
 scp-0 is set of words. so order and duplicated words are ignored.
 
-useless inputs, word which is not subnode of root will be ignored `g h: h>O ㄷㄱ해독히ㅜ대ㅑ허 [3,5]` is equal to `h: h>O []` (it is just 0) - convenience of parsing 
+useless inputs, word which is not subnode of root will be ignored `g h: h>O ㄷㄱ해독히ㅜ대ㅑ허 [3,5]` is equal to `h: h>O []` (it is just 0) - convenience of parsing (i don't sure that O can be 0-ary..)
 
 ### functions
 
@@ -86,13 +86,18 @@ example: `I^3_2` is a function `(_,x,_) ↦ x`
 #### primitive recursion
 
 `f|>p
-f|+>c
+f|>>c
 `
 means 
  `f(𝑥⃗,0) ≃ p(𝑥⃗)`
 ` f(𝑥⃗, y+1) ≃ c(𝑥⃗, y, f(𝑥⃗,y))`
 
  you should define p, c somewhere.
+
+(it was `f|>p
+f|+>c
+` in version less or equal than 0.0)
+
 
 #### μ-recursion
 
@@ -113,28 +118,118 @@ putting `f:` somewhere, the program will represent f
 
 ### naming rule
 
-you can name functions using permutation of a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,x,0,1,2,3,4,5,6,7,8,9.
+
+you can name functions using permutation of a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,x,0,1,2,3,4,5,6,7,8,9. * ≤ v0.0*
+
+you can use !,@,#,$,%,^,&,\*,(,),-,+,_,=,/,\,?,',",\[,\],{,},`,~,;. *from 0.1*
 
 empty name not allowed ('Semi' in 'SemiCommutative Processor' is abb of 'Semigroup' (joke))
 
 
-### example 
+### *syntactic sugars*
 
-`g>S.I^3_3 f|>I^1_1 f|+>g f:` means `(a, b) ↦ a + b`
+#### more pretty premitive recursion
 
+you can use `f|p>
+f|c>>` to replace `f|>p
+f|>>c` respectively.  *from 0.1*
+
+#### composition iteration 
+
+`c: c>S.S.S.S.S.S.S` now allowed
+
+greater then 1 ary e.g. `c: c>a,S.S.S,b.d,S.O (some code omitted)` also allowed
+ 
+(i don't sure whether it works well or there exist some ambiguous issue, but composition is associative)
+
+*from 0.1*
+
+#### S^n
+
+iterate `S` n times. e.g. `S^3` equals to `s3: s2>S.S s3> S.s2` (it is `+ 3`) 
+
+*from 0.1 *
+
+#### :=
+
+just renaming the initial function. `id: id:=I^1_1` is just `I^1_1`.
+
+*from 0.1 *
+
+
+### how to make it
+
+for your freedom of function name choice, there are no useless built-in function. (this language does not have scope)
+
+so functions below are not built-in functions. it is just example.
+
+#### constant
+
+`S^n.O` is `const n` (i recommend to name it as number itself e.g. `3: 3>S^n.O`)
+
+
+#### identity function
+
+id: `I^1_1`
+
+#### predecessor
+`-1: p|>O p|>>I^2_1`
+
+
+#### binary addition
+`+: f>S.I^3_3 +|>I^1_1 +|>>f`
+
+
+#### proper subtraction `(a, b) ↦ max (a - b, 0)`
+
+`-: -|>I^1_1 -|>>c c>-1.I^3_3` (code for -1 omitted)
+
+#### multiplication
+`*: *|>O *|>>a a>+.I^3_1,I^3_3 ` (code for + omitted)
+
+#### power
+`^: ^|s> s>S.O ^|c>> c>*.I^3_3,I^3_1`
+(code for * omitted)
+
+
+#### if-else `f = if c [x1, .. , xm] == 0 then g[x1, .. , xm] else h [x1, .. , xm]`
+
+`f: f>+.if,else 
+ if>*.ch,g
+ else>*.ch',h
+ ch'>z'.c 
+ z'|>1 z'|>>O  
+ ch>z.c 
+ z|>O z|>>1 `
+
+(code for *, +, 1 omitted)
+
+if you want another characteristic function, make it yourself.
+
+*from 0.1 *
 
 ### warning
 
+*regulations are written in blood.*
+
 unexpected thing can happen if your code has incorrect syntax 
+
 
 it is all your fault if it happened 
 
 
 ## scpi 
 
-it is scp-0 interpreter works forever (of course there can be some exception)
+it is scp-0 interpreter works forever (of course there can be some exception, i'm trying..)
 
-input syntax : `code [n1, n2, .. nm]`, output is just a number
+### input syntax 
+`code [n1, n2, .. nm]`, output is just a number
+
+### slowness
+
+it is slow so you should rearrange your input sequence if you can until i fix it. (`g>S.I^3_3 f|>I^1_1 f|>>g f: [1,100]` takes very very long time but `g>S.I^3_3 f|>I^1_1 f|>>g f: [100,1]` ends immediately)
+
+### example
 
 ```
 welcome to the scp-0 world. scpi will run forever
@@ -146,12 +241,12 @@ scpi> g: g>S.0 [2]
 1
 scpi> g: g>S.0 k: [2]
 USER ERROR: why root do not uniquely exist: g,k
-scpi> f: g>S.I^3_3 f|>I^1_1 f|+>g [1,2,4]
+scpi> f: g>S.I^3_3 f|>I^1_1 f|>>g [1,2,4]
 USER ERROR: you wrong! !! your I is 1-ary, not 2-ary
-scpi> f: g>S.I^3_3 f|>I^1_1 f|+>g [1,7]
+scpi> f: g>S.I^3_3 f|>I^1_1 f|>>g [1,7]
 8
-scpi> g>S.I^3_3 f|>I^1_1 f|+>g m: m<g [2,5]
-
+scpi> g>S.I^3_3 f|>I^1_1 f|>>g m: m<g [2,5]
+*hangs forever*
 
 ```
 infinite loop is not error (if you find the way to know whether it is infinite loop or not then the world explode)
