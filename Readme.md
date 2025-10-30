@@ -146,7 +146,7 @@ greater then 1 ary e.g. `c: c>a,S.S.S,b.d,S.O (some code omitted)` also allowed
 
 #### S^n
 
-iterate `S` n times. e.g. `S^3` equals to `s3: s2>S.S s3> S.s2` (it is `+ 3`) 
+iterate `S` n times. e.g. `S^3` equals to `s3: s2>S.S s3>S.s2` (it is `+ 3`) 
 
 *from 0.1 *
 
