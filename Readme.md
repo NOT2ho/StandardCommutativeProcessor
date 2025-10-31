@@ -140,7 +140,7 @@ f|>>c` respectively.  *from 0.1*
 
 greater then 1 ary e.g. `c: c>a,S.S.S,b.d,S.O (some code omitted)` also allowed
  
-(i don't sure whether it works well or there exist some ambiguous issue, but composition is associative)
+(i don't sure whether it works well or there exist some ambiguity issue, but composition is associative)
 
 *from 0.1*
 
