@@ -20,7 +20,7 @@ it converts string(as element of commutative monoid) onto godel numbers(range ca
 
 
 ### you can replace scp-0 to other language if you want. 
-(in this case you should change the function 'symbols'(Numbering.hs:80) (if you want to change numeric function then rewrite SCP_1.hs too) and recompile)
+(in this case you should change the function 'symbols'(Numbering.hs:80) (if you want to change numeric function language then rewrite SCP_1.hs too) and recompile)
 
 
 
