@@ -15,12 +15,12 @@ you can iterate [this](https://github.com/NOT2ho/StandardCommutativeProcessor?ta
 it contains [scp-0](https://github.com/NOT2ho/StandardCommutativeProcessor?tab=readme-ov-file#semicommutative-processor-0). 
 using [scp-0](https://github.com/NOT2ho/StandardCommutativeProcessor?tab=readme-ov-file#semicommutative-processor-0), you can define `ℕ×ℕ..×ℕ-> ℕ` recursive function. ([scp-0](https://github.com/NOT2ho/StandardCommutativeProcessor?tab=readme-ov-file#semicommutative-processor-0) can represent all partial recursive functions, so you can just use [scp-0](https://github.com/NOT2ho/StandardCommutativeProcessor?tab=readme-ov-file#semicommutative-processor-0) independently for represent all programs.)
 
-it converts string(as element of commutative monoid) onto godel numbers(range can be greater than set of godel numbers) and change it to .scp file.
+it converts string(as element of commutative monoid) onto godel numbers(range can be greater than set of godel numbers) and change it to scp-0 and run program and make output to file(of a number as string).
 
 
 
 ### you can replace scp-0 to other language if you want. 
-(in this case you should change the function 'symbols'(Numbering.hs:80) (if you want to change numeric function language then rewrite SCP_1.hs too) and recompile)
+(in this case you should change the function 'symbols'(Numbering.hs:81) (if you want to change the [language representing numeric function](https://github.com/NOT2ho/StandardCommutativeProcessor/edit/main/Readme.md#line-2) then you should rewrite SCP_1.hs to include the language interpreter too) and recompile)
 
 
 
@@ -40,7 +40,7 @@ input will be tuple of line 1, output is a godel number(it is just scp-0 code co
 string(as element of commutative monoid) made of chars in line 1. 
 
 
-#### it will count the number of each char in line 3, and make it to tuple(order determined by line 1) and the function in line 2 will turn the tuple into a godel number(it is scp-0 code). and you can ctrl c v it in scpi.
+#### it will count the number of each char in line 3, and make it to tuple(order determined by line 1) and the function in line 2 will turn the tuple into a godel number(it is scp-0 code or [other language you have selected](https://github.com/NOT2ho/StandardCommutativeProcessor/edit/main/Readme.md#you-can-replace-scp-0-to-other-language-if-you-want). and scp-0(or [other language](https://github.com/NOT2ho/StandardCommutativeProcessor/edit/main/Readme.md#you-can-replace-scp-0-to-other-language-if-you-want)) interpreter will change it to desired output (in [scp-0](https://github.com/NOT2ho/StandardCommutativeProcessor?tab=readme-ov-file#semicommutative-processor-0) case, a number).
 
 ### some example: 
 todo
@@ -121,12 +121,18 @@ putting `f:` somewhere, the program will represent f
 
 ### naming rule
 
+empty name not allowed ('Semi' in 'SemiCommutative Processor' is abb of 'Semigroup' (joke))
 
 you can name functions using permutation of a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,x,0,1,2,3,4,5,6,7,8,9. *≤ v0.0*
 
-you can use !,@,#,$,%,^,&,\*,(,),-,+,_,=,/,\,?,',",\[,\],{,},`,~,;. *from 0.1*
+you can use !,@,#,$,%,^,&,\*,(,),-,+,_,=,/,\,?,',",\[,\],{,},`,~,;. *from 0.1* 
 
-empty name not allowed ('Semi' in 'SemiCommutative Processor' is abb of 'Semigroup' (joke))
+#### *inside scp-1*
+
+to avoid big power, you can use only `*` by default. e.g. `*`, `****`, `************`
+
+you can change function name list by editing the function `name`(Numbering.hs:86). 
+
 
 
 ### *syntactic sugars*
