@@ -79,7 +79,7 @@ empowerer i p = let rec j i = if i `mod` p /= 0 then j else rec (j+1) (i `div` p
                     in rec 0 i
 
 symbols :: [Char]
-symbols = "^+,.IO|S:<> " ++ name
+symbols = name ++ "^+,.IO|S:<> "
 
 
 name :: [Char]
