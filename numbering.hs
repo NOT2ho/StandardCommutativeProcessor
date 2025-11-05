@@ -1,11 +1,12 @@
 {-# LANGUAGE ParallelListComp #-}
 
-module Numbering(conaturalizer, main) where
+module Numbering(conaturalizer, main, name) where
 
 import Data.Bifunctor
 import System.Directory
 import System.FilePath
 import Distribution.Compat.Prelude(readMaybe)
+
 
 numbering :: IO ()
 numbering = main
@@ -78,7 +79,11 @@ empowerer i p = let rec j i = if i `mod` p /= 0 then j else rec (j+1) (i `div` p
                     in rec 0 i
 
 symbols :: [Char]
-symbols = "!@#$%^&*()-+_/\\?\"\\{}`~;,._+IO|S:<> 1234567890qwertyuiopasdfghjklzxcvbnm[]"
+symbols = "^+,.IO|S:<> " ++ name
+
+
+name :: [Char]
+name = ['*']
 
 de :: Integer -> Char
 de i = if fromIntegral i < length symbols then symbols !! fromIntegral i

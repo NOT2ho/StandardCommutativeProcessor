@@ -39,7 +39,7 @@ scpi =  do
             code' <- getLine
             let (code, param) = scpiParser code'
             case param of
-                Just p -> either print  (putStrLn . ("USER ERROR: "++) ) $ scp_0 code p
+                Just p -> either print  (putStrLn . ("USER ERROR: "++) ) $ scp_0 isName code p
                 Nothing -> putStrLn "input parse error"
             -- either (\x -> putStrLn $ "num: " ++  show (x $ reverse param)) (\x -> putStrLn $ "USER ERROR: "++ x) (scp_0 code)
 
@@ -104,8 +104,8 @@ comp f cs x =
 -------------------eval-----------------------------
 
 
-scp_0 :: String -> F
-scp_0 s = let (ROOT pt) = parseTree s
+scp_0 :: (Char -> Bool) -> String -> F
+scp_0 nf s = let (ROOT pt) = parseTree nf s
             in case pt of
                 INIT (ERROR e) -> const (Right e)
                 _ -> eval pt
@@ -149,8 +149,8 @@ data Init
     deriving (Show)
 
 
-parseTree :: String -> Node Init
-parseTree = subparseTree . fromList . parser
+parseTree :: (Char -> Bool) -> String -> Node Init
+parseTree nf = subparseTree . fromList . parser nf
     where
         subparseTree :: Set [String] -> Node Init
         subparseTree set = let (root, es) = S.partition (\x -> drop 1 x == ["root"]) set
@@ -215,12 +215,12 @@ parseTree = subparseTree . fromList . parser
 isName :: Char -> Bool
 isName =(\x y z -> x || y || z) <$> isDigit <*> isLower <*> flip elem ['!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '-', '+', '_', '/', '\\', '?', '\"', '\'', '{', '}', '`', '~', ';']
 
-parser :: String -> [[String]]
-parser s = L.map subparser (words (L.map (\x -> if x == '\n' then ' ' else x) s))
+parser :: (Char -> Bool) -> String -> [[String]]
+parser nf s = L.map subparser (words (L.map (\x -> if x == '\n' then ' ' else x) s))
         where
         subparser :: String -> [String]
-        subparser s = let (fname, s') = span isName s
-                    in let (nodetype, s'') = break ((||) <$> isName <*> isAlpha) s'
+        subparser s = let (fname, s') = span nf s
+                    in let (nodetype, s'') = break ((||) <$> nf <*> isAlpha) s'
                     in fname : node nodetype s''
                         where node t strs
                                 | t == "" = []
@@ -239,9 +239,9 @@ parser s = L.map subparser (words (L.map (\x -> if x == '\n' then ' ' else x) s)
         precParse s = if s == ">>" then ["ERROR", "empty primitive recursion"] else
                         let (c,cl, ll) = (init (init s), last (init s) , last s)
                         in case () of
-                            ()  | cl == '>' && ll == '>'  && ((||) <$> all isName <*> all isUpper ) c -> "PREC1" : initial c
-                                | ll == '>' && ((||) <$> all isName <*> all isUpper ) (cl:c) -> "PREC0" : initial (c ++ [cl])
-                                | all isName c -> ["ERROR", "primitive recursion syntax wrong, where is >"]
+                            ()  | cl == '>' && ll == '>'  && ((||) <$> all nf <*> all isUpper ) c -> "PREC1" : initial c
+                                | ll == '>' && ((||) <$> all nf <*> all isUpper ) (cl:c) -> "PREC0" : initial (c ++ [cl])
+                                | all nf c -> ["ERROR", "primitive recursion syntax wrong, where is >"]
                                 | head (initial s) == "ERROR" -> ["ERROR", "you can't use composition directly in |>"]
                                 | otherwise -> ["ERROR", "what do you want to do in primitive recursion"]
 
@@ -260,7 +260,7 @@ parser s = L.map subparser (words (L.map (\x -> if x == '\n' then ' ' else x) s)
                 if head (projection cs)  == 'E' then ["ERROR" , drop 1 $ projection cs]
                 else ["I" ++ projection cs]
             | null (c:cs) = ["ERROR", "empty function name not allowed (in initial)"]
-            | all isName (c:cs) = [c:cs]
+            | all nf (c:cs) = [c:cs]
             | otherwise = ["ERROR", (c:cs) ++ " is not initial function or function name"]
         initial [] = []
 
