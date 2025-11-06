@@ -5,7 +5,12 @@ it is DIY kit for make your own standard commutative numbering.
 
 # SCP-n 
 
-you can iterate [this](https://github.com/NOT2ho/StandardCommutativeProcessor?tab=readme-ov-file#SCP-1) forever (replace scp-0 to scp-(n-1), scp-1 to scp-n)
+you can iterate [this](https://github.com/NOT2ho/StandardCommutativeProcessor?tab=readme-ov-file#SCP-1) forever (replace `scp-0` to `scp-(n-1)`, `scp-1` to `scp-n`)
+
+if you fix the fucntion in [line 2](https://github.com/NOT2ho/StandardCommutativeProcessor/tree/main?tab=readme-ov-file#line-2), there is primitive recursion `n ↦ scp-n` i.e. *todo*
+
+is it really possible? todo
+
 
 # SCP-1
 
