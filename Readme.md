@@ -16,6 +16,9 @@ is it really possible? todo
 
 ***(not tested yet)***
 
+it do not check whether your numbering is standard or not (i don't know it is possible), you should select a good(undoable) function.
+
+
 
 it contains [scp-0](https://github.com/NOT2ho/StandardCommutativeProcessor?tab=readme-ov-file#semicommutative-processor-0). 
 using [scp-0](https://github.com/NOT2ho/StandardCommutativeProcessor?tab=readme-ov-file#semicommutative-processor-0), you can define `ℕ×ℕ..×ℕ-> ℕ` recursive function. ([scp-0](https://github.com/NOT2ho/StandardCommutativeProcessor?tab=readme-ov-file#semicommutative-processor-0) can represent all partial recursive functions, so you can just use [scp-0](https://github.com/NOT2ho/StandardCommutativeProcessor?tab=readme-ov-file#semicommutative-processor-0) independently for represent all programs.)
