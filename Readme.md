@@ -21,7 +21,7 @@ it converts string(as element of commutative monoid) onto godel numbers(range ca
 
 ### you can replace scp-0 to other language if you want. 
 (in this case you should change the function 'symbols'(Numbering.hs:81) (if you want to change the [language representing numeric function](https://github.com/NOT2ho/StandardCommutativeProcessor/edit/main/Readme.md#line-2) then you should rewrite SCP_1.hs to include the language interpreter too) and recompile)
-
+fix 
 
 
 
