@@ -19,9 +19,9 @@ main = do
     filename <- getLine
     let fileloc = currentDir </> filename
     file <- readFile fileloc
-    putStr "output file name(default: txt.txt): "
+    putStr "output file name(default: scp.scp): "
     filename' <- getLine
-    let output =  if null filename' then  currentDir </> "txt.txt" else currentDir </> filename'
+    let output =  if null filename' then  currentDir </> "scp.scp" else currentDir </> filename'
     writeFile output $ scp_1 file
 
 scp_1 :: String -> String
