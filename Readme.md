@@ -21,7 +21,7 @@ it do not check whether your numbering is standard or not (i don't know it is po
 
 
 it contains [scp-0](https://github.com/NOT2ho/StandardCommutativeProcessor?tab=readme-ov-file#semicommutative-processor-0). 
-using [scp-0](https://github.com/NOT2ho/StandardCommutativeProcessor?tab=readme-ov-file#semicommutative-processor-0), you can define `ℕ×ℕ..×ℕ-> ℕ` recursive function. ([scp-0](https://github.com/NOT2ho/StandardCommutativeProcessor?tab=readme-ov-file#semicommutative-processor-0) can represent all partial recursive functions, so you can just use [scp-0](https://github.com/NOT2ho/StandardCommutativeProcessor?tab=readme-ov-file#semicommutative-processor-0) independently for represent all programs.)
+using [scp-0](https://github.com/NOT2ho/StandardCommutativeProcessor?tab=readme-ov-file#semicommutative-processor-0), you can define `ℕ×ℕ×..×ℕ-> ℕ` recursive function. ([scp-0](https://github.com/NOT2ho/StandardCommutativeProcessor?tab=readme-ov-file#semicommutative-processor-0) can represent all partial recursive functions, so you can just use [scp-0](https://github.com/NOT2ho/StandardCommutativeProcessor?tab=readme-ov-file#semicommutative-processor-0) independently for represent all programs.)
 
 it converts string(as element of commutative monoid) onto godel numbers(range can be greater than set of godel numbers) and change it to scp-0 file.
 
