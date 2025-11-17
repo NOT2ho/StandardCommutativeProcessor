@@ -16,8 +16,9 @@ is it really possible? todo
 
 ***(not tested yet)***
 
-it do not check whether your numbering is standard or not (i don't know it is possible), you should select a good(undoable) function.
+it do not check whether your numbering is standard or not (i don't think it is possible), you should select a good(undoable) function.
 
+i like scp foundation so i named it s.c.p.. standardness is not so important in this project.
 
 
 it contains [scp-0](https://github.com/NOT2ho/StandardCommutativeProcessor?tab=readme-ov-file#semicommutative-processor-0). 
