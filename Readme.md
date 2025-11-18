@@ -49,7 +49,7 @@ input will be tuple of line 1, output is a godel number(it is just scp-0 code co
 string(as element of commutative monoid) made of chars in line 1. 
 
 
-#### it will count the number of each char in line 3, and make it to tuple(order determined by line 1) and the function in line 2 will turn the tuple into a godel number(it is scp-0 code or [other language you have selected](https://github.com/NOT2ho/StandardCommutativeProcessor/edit/main/Readme.md#you-can-replace-scp-0-to-other-language-if-you-want). and scp-0(or [other language](https://github.com/NOT2ho/StandardCommutativeProcessor/edit/main/Readme.md#you-can-replace-scp-0-to-other-language-if-you-want)) interpreter will change it to [scp-0](https://github.com/NOT2ho/StandardCommutativeProcessor?tab=readme-ov-file#semicommutative-processor-0) code.)
+#### it will count the number of each char in line 3, and make it to tuple(order determined by line 1) and the function in line 2 will turn the tuple into a godel number(it is scp-0 code or [other language you have selected](https://github.com/NOT2ho/StandardCommutativeProcessor/tree/main?tab=readme-ov-file#you-can-replace-scp-0-to-other-language-if-you-want). and scp-0(or [other language](https://github.com/NOT2ho/StandardCommutativeProcessor/tree/main?tab=readme-ov-file#you-can-replace-scp-0-to-other-language-if-you-want)) interpreter will change it to [scp-0](https://github.com/NOT2ho/StandardCommutativeProcessor?tab=readme-ov-file#semicommutative-processor-0) code.)
 
 ### some example: 
 ```
