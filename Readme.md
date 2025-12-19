@@ -3,6 +3,8 @@
 
 it is DIY kit for make your own standard commutative numbering.
 
+description: see [this](https://github.com/NOT2ho/StandardCommutativeProcessor/blob/main/standard_commutative_processor.pdf)
+
 # SCP-n 
 
 you can iterate [this](https://github.com/NOT2ho/StandardCommutativeProcessor?tab=readme-ov-file#SCP-1) forever (replace `scp-0` to `scp-(n-1)`, `scp-1` to `scp-n`)
